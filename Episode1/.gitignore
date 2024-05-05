@@ -2,11 +2,11 @@
 .env
 
 # Parcel related files
-dist/
-.cache/
+dist
+.parcel-cache
 
 
 # Dependency directories
-node_modules/
-jspm_packages/
+node_modules
+jspm_packages
 
