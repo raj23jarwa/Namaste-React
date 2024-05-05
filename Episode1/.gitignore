@@ -1,0 +1,12 @@
+# dotenv environment variables file
+.env
+
+# Parcel related files
+dist/
+.cache/
+
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
