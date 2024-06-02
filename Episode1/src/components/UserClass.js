@@ -5,45 +5,31 @@ class UserClass extends React.Component {
     this.state = {
       count: 0,
       count2: 2,
+      userInfo:{}
     };
-    console.log(this.props.name+" child constructor")
+    // console.log(this.props.name+" child constructor")
   }
-  componentDidMount(){
-    console.log(this.props.name + "Child component did mount")
+  async componentDidMount(){
+    // console.log(this.props.name + "Child component did mount")
+    // API Call
+    const data =await fetch("https://api.github.com/users/raj23jarwa")
+    const json=await data.json();
+    console.log(json)
+    this.setState({
+        userInfo:json
+    })
   }
   render() {
-    console.log(this.props.name +" child render")
-    const { name, location } = this.props;
-    const { count, count2 } = this.state;
+    // console.log(this.props.name +" child render")
+    // const { name, location } = this.props;
+    // const { count, count2 } = this.state;
+    const {name,location,bio}=this.state.userInfo;
     return (
       <div className="userCard">
-        {/* <h1>Count:{this.state.count}</h1> */}
-        <h1>Count:{count}</h1>
-        <h1>Count2:{count2}</h1>
-        <button
-          onClick={() => {
-            this.setState({
-              count: this.state.count + 1,
-              count2: this.state.count2 + 1,
-            });
-          }}
-        >
-          {" "}
-          Increment{" "}
-        </button>
-        <button
-          onClick={() => {
-            this.setState({
-              count2: this.state.count2 - 1,
-            });
-          }}
-        >
-          {" "}
-          Decrement{" "}
-        </button>
-        <h2>Name: {this.props.name}</h2>
+       
+        <h2>Name: {name}</h2>
         <h3>Location: {location}</h3>
-        <h4>Contact: 9518158992</h4>
+        <h4>Bio: {bio}</h4>
       </div>
     );
   }

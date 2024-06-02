@@ -156,7 +156,14 @@ body {
 }
 
 .login {
-    padding: 0 10px;
+    padding: 1rem 2rem ;
+    background-color: rgb(94, 94, 206);
+    color: white;
+    font-size: 1rem;
+    margin: 1rem;
+    border-radius: 2rem;
+    border: 1px solid gray;
+    cursor: pointer;
 }
 
 .resCardsh {
@@ -214,22 +221,31 @@ body {
 
 #restInfoCard {
     display: flex;
-    /* width: auto; */
-    flex-direction: column;
     border: 1px solid;
-    width: 50%;
-    padding: 2rem 7rem;
-    gap: 30px;
-
+    padding: 2rem;
+    gap: 2rem;
 }
 
+#restInfoCard > .resImage>img{
+    width: 200px;
+    border-radius: 10%;
+}
+.resInfo{
+    display: flex;
+        /* width: auto; */
+        flex-direction: column;
+        /* border: 1px solid; */
+        /* width: 50%; */
+        /* padding: 2rem 7rem; */
+        gap: 30px;
+}
 #place > ul{
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
 .userCard{
-    border: 1px solid;
+    /* border: 1px solid; */
     padding: 4%;
     display: flex;
     width: fit-content;
