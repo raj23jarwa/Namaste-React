@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = ({ data }) => {
-  const [showItemList, setShowItemList] = useState(false);
-  console.log("data--->", data);
+const RestaurantCategory = ({ data,showItems,setShowIndex }) => {
+    console.log("data--->", data);
   const handleClick = () => {
     console.log("clicked");
-    setShowItemList(!showItemList);
+    setShowIndex()
   };
   return (
     <>
@@ -20,12 +19,11 @@ const RestaurantCategory = ({ data }) => {
             {" "}
             {data.title} ({data.itemCards.length}){" "}
           </span>
-          <span> {showItemList ? "⬆️" : "⬇️"}</span>
+          <span> {showItems ? "⬆️" : "⬇️"}</span>
         </div>
         {/* Accordion Body */}
-        {showItemList && (
-          <ItemList items={data.itemCards} />
-        ) }
+        {showItems && <ItemList items={data.itemCards} />
+  }
       </div>
     </>
   );

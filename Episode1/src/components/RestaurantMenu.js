@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CDN_URL } from "../utils/constant";
 import useRestaurantMenu from '../utils/useRestaurantMenu'
 import Shimmer from "./Shimmer";
@@ -7,15 +7,16 @@ import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
-  // const [showItemList,setShowItemList] =useState(false)
+  const [showIndex,setShowIndex] =useState(0)
 
       const resInfo= useRestaurantMenu(resId);
   if (resInfo === null) {
     return <Shimmer />;
   }
-  const handleAccordion=()=>{
-   setShowItemList(showItemList)
-  }
+
+  const handleSetShowIndex = (index) => {
+    setShowIndex(prevIndex => (prevIndex === index ? null : index));
+  };
 
   const {
     cloudinaryImageId,
@@ -80,8 +81,12 @@ const RestaurantMenu = () => {
 
       {/*categories accordion */}
 
-      {restCategories.map((category) =>(
-               <RestaurantCategory data={category?.card?.card}/>
+      {restCategories.map((category,index) =>(
+               <RestaurantCategory data={category?.card?.card}
+               showItems={index ===showIndex ? true :false}
+               setShowIndex={() => handleSetShowIndex(index)}
+              
+               />
         
       ))}
     </div>
