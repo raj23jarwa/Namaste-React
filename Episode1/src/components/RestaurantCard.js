@@ -13,10 +13,11 @@ const RestaurantCard =({
 }) =>{
     
     return(
-    <div className="resCard">
-        <img src={CDN_URL+cloudinaryImageId} alt="image"></img>
+    <div className="resCard flex flex-col w-60 items-center border border-black p-2 rounded-xl shadow-xl shadow-gray-400">
+        <img src={CDN_URL+cloudinaryImageId} alt="image" className='w-50 h-30 rounded-xl'
+></img>
         <div className="cardInfo">
-            <p className="name">{name}</p>
+            <h3 className="name text-xl font-semibold">{name}</h3>
             <span className="area">{locality+", "}</span>
             <span>{areaName}</span>
            
@@ -33,5 +34,18 @@ const RestaurantCard =({
     )
 }
 
+// HigherOrder component
+// Input RestaurantCard ==> output promotedRestaurantCard
+
+export const withPromotedLabel =(RestaurantCard)=>{
+    return(props) =>{
+        return (
+           <div>
+            <label className='absolute bg-black text-white p-2 m-2'> Promoted</label>
+            <RestaurantCard {...props}/>
+           </div>
+        )
+    }
+}
 
 export default RestaurantCard
