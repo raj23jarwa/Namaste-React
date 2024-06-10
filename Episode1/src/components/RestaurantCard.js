@@ -29,7 +29,7 @@ const RestaurantCard =({
             </p>
             <p className="cost">{costForTwo}</p>
             <p className="cuisines">{cuisines.join(", ")}</p>
-            <p>This is designed by:{loggedInUser}</p>
+            <p>User:{loggedInUser}</p>
         </div>
     </div>
     )

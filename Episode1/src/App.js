@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useContext, useState } from "react"
+import React, { lazy, Suspense, useContext, useState,useEffect } from "react"
 import ReactDOM from "react-dom/client"
 import { createBrowserRouter ,Outlet,RouterProvider } from "react-router-dom"
 import Header from "./components/Header"
@@ -13,13 +13,25 @@ import UserContext from './utils/UserContext';
 
 const Grocery=lazy(()=>import("./components/Grocery"))
 const AppLayout = () => {
-    // const [loggedInUser, setLoggedInUser] = useState('Rajkumar'); // Define loggedInUser and setLoggedInUser
-   const {loggedInUser} =useContext(UserContext)
+    const [userName, setUserName] = useState(); 
+    // authentication
+    useEffect(() => {
+    //   Make an api call and send username and password
+    const data={
+        name:"Rajkumar Singh"
+    }
+    setUserName(data.name)
+    }, [])
+    // we can set loggedInUser value  according to our preference, this is the beauty of context.
+//    const {loggedInUser} =useContext(UserContext)
     return (
         <>
-        <UserContext.Provider value={{loggedInUser}}>
+        <UserContext.Provider value={{loggedInUser:userName,setUserName}}>
         <Header />
+        {/* </UserContext.Provider> */}
+        {/* <UserContext.Provider value={{loggedInUser:'raju'}}> */}
         <Outlet/>
+
         </UserContext.Provider>
            
         </>

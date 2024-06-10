@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_URL } from "../utils/constant";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 export const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState(null);
   const [filteredRestaurant, setFilteredRestaurant] = useState(null);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(""); 
+  const {loggedInUser,setUserName} =useContext(UserContext)
   useEffect(() => {
     fetchData();
   }, []);
@@ -67,7 +69,7 @@ export const Body = () => {
           />
           <button
             onClick={handleSearch}
-            className="bg-green-700 text-white px-3 py-2 rounded-sm"
+            className="bg-gray-800 text-white px-3 py-2 rounded-sm"
           >
             Search
           </button>
@@ -78,6 +80,13 @@ export const Body = () => {
         >
           Top Rated Restaurant
         </button>
+        <label>User:</label>
+        <input
+            type="text"
+            value={loggedInUser}
+            onChange={(e) => setUserName(e.target.value)}
+            className="border border-gray-500 p-2"
+          />
       </div>
       <div className="resContainer grid grid-cols-5 px-10 gap-2">
         {filteredRestaurant.map((restaurant) => (
