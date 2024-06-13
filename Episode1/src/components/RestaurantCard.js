@@ -14,9 +14,9 @@ const RestaurantCard =({
 }) =>{
      const {loggedInUser} =useContext(UserContext)
     return(
-    <div className="resCard flex flex-col w-60 items-center border border-black p-2 rounded-xl shadow-xl shadow-gray-400">
-        <img src={CDN_URL+cloudinaryImageId} alt="image" className='w-50 h-30 rounded-xl'></img>
-        <div className="cardInfo">
+    <div className="resCard flex flex-col w-60 p-2 items-center border border-black  rounded-xl shadow-xl shadow-gray-400">
+        <img src={CDN_URL+cloudinaryImageId} alt="image" className='w-30 rounded-xl'></img>
+        <div className="cardInfo h-60">
             <h3 className="name text-xl font-semibold">{name}</h3>
             <span className="area">{locality+", "}</span>
             <span>{areaName}</span>
