@@ -21,7 +21,7 @@ export const Body = () => {
       let restData =
         data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
-      console.log(restData);
+      console.log("restData:",restData);
 
       setListOfRestaurant(restData); // Assuming data is an array of restaurants
       setFilteredRestaurant(restData);
