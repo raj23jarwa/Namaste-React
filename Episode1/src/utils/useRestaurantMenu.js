@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { MENU_URL } from "./constant"
 const useRestaurantMenu=((resId) =>{
     const [resInfo,setResInfo] =useState(null)
+
     useEffect(() =>{
        fetchMenu();
     },[])

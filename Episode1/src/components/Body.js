@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect,useContext,useRef } from "react";
 import RestaurantCard from "../components/RestaurantCard";
 import Shimmer from "./Shimmer";
 import { SWIGGY_URL } from "../utils/constant";
@@ -8,21 +8,34 @@ import UserContext from "../utils/UserContext";
 export const Body = () => {
   const [listOfRestaurant, setListOfRestaurant] = useState(null);
   const [filteredRestaurant, setFilteredRestaurant] = useState(null);
+  const [resTitle,setResTitle] =useState(null)
+
   const [input, setInput] = useState(""); 
   const {loggedInUser,setUserName} =useContext(UserContext)
+  const inputRef = useRef(null);
+
   useEffect(() => {
     fetchData();
+  }, []);
+  
+  useEffect(() => {
+    // Focus the input element when the component mounts
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
   const fetchData = async () => {
     try {
       const response = await fetch(SWIGGY_URL);
       const data = await response.json();
       console.log(data);
+      let resTitle = data?.data?.cards[1]?.card?.card?.header?.title;
+      console.log("resTitle",resTitle)
       let restData =
         data?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
       console.log("restData:",restData);
-
+      setResTitle(resTitle)
       setListOfRestaurant(restData); // Assuming data is an array of restaurants
       setFilteredRestaurant(restData);
     } catch (error) {
@@ -83,11 +96,15 @@ export const Body = () => {
         <label>User:</label>
         <input
             type="text"
+            ref={inputRef}
             value={loggedInUser}
             onChange={(e) => setUserName(e.target.value)}
             className="border border-gray-500 p-2"
           />
       </div>
+      <header>
+        <h1 className='text-3xl font-bold p-2 m-2'>{resTitle}</h1>
+       </header>
       <div className="resContainer grid grid-cols-5 px-10 gap-2">
         {filteredRestaurant.map((restaurant) => (
           <Link
@@ -95,7 +112,7 @@ export const Body = () => {
             to={"/restaurants/" + restaurant?.info?.id}
             
           >
-            <RestaurantCard {...restaurant.info} />
+            <RestaurantCard {...restaurant.info} resTitle={resTitle} />
           </Link>
         ))}
       </div>

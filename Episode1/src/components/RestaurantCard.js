@@ -2,21 +2,22 @@ import React, { useContext } from 'react';
 import { CDN_URL } from '../utils/constant';
 import UserContext from '../utils/UserContext';
 
-const RestaurantCard = (props) => {
-    const { restData } = props;
+const RestaurantCard = ({
+    cloudinaryImageId,
+    cuisines,
+    name,
+    locality,
+    areaName,
+    costForTwo,
+    avgRating,
+    sla,
+    resTitle
+}) => {
+   
     const { loggedInUser } = useContext(UserContext);
-    const {
-        cloudinaryImageId,
-        cuisines,
-        name,
-        locality,
-        areaName,
-        costForTwo,
-        avgRating,
-        sla,
-    } = restData;
 
     return (
+        <>
         <div className="resCard flex flex-col w-60 p-2 items-center border border-black rounded-xl shadow-xl shadow-gray-400">
             <img src={CDN_URL + cloudinaryImageId} alt="image" className="w-30 rounded-xl"></img>
             <div className="cardInfo h-60">
@@ -33,6 +34,7 @@ const RestaurantCard = (props) => {
                 <p>User: {loggedInUser}</p>
             </div>
         </div>
+        </>
     );
 };
 
